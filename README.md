@@ -15,7 +15,7 @@ Traffic Monitor application uses following tools and technologies.
 * jQuery.js
 * Chart.js
 
-IoT Traffic Monitor is a Maven Aggregator project. It includes following three projects.
+IoT Traffic Monitor is a Maven Aggregator project. It includes following four projects.
 
 * IoT Kafka Producer
 * IoT Spark Processor
