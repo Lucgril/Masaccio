@@ -10,7 +10,7 @@ This project requires following tools and technologies.
 * [Cassandra - 3.11.1](http://cassandra.apache.org/download/)
 * [Spring Boot - 1.5.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot/1.3.5.RELEASE)
 
-Please refer "IoTData.cql" file to create Keyspace and Tables in Cassandra Database, which are required by this application. This is the same file which is available in "iot-spark-processor" project.
+Please refer "IoTData.cql" file to create Keyspace and Tables in Cassandra Database, which are required by this application. This is the same file which is available in "IoT Spark Processor" project.
 
 You can build and run this application using below commands. Please check resources/cassandra.properties for configuration details.
 
