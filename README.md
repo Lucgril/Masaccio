@@ -21,7 +21,7 @@ IoT Traffic Monitor is a Maven Aggregator project. It includes following four pr
 * IoT Spring Server
 * Administrator Dashboard
 
-For building these projects it requires following tools. Please refer README.md files of individual projects for more details.
+For building these projects it requires tools and technologies written above. Please refer README.md files of individual projects for more details.
 
 Use below command to build all projects.
 
