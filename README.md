@@ -1,5 +1,4 @@
-# Project Title
-
+# Masaccio - Monitoring for urbAn SAfety with the IoT
 
 ## Getting Started
 
