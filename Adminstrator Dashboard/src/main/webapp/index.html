@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    </head>
+    <body>
+        <canvas id="bar-chart" width="800" height="400"></canvas>
+    </body>
+</html>
+
+<script>
+    window.onload = function() {
+
+        Chart.defaults.global.defaultFontSize = 18;
+
+        var dataPoints = [];
+        var labels = [];
+        var color = [];
+        var j = 0;
+        /*
+         var color1;
+         var color2;
+         var color3;
+         var color4;
+         */
+        var backgroundColor = [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+        ];
+
+        function addData(data) {
+            j = 0;
+            console.log(data[data.length-1]);
+            for (var i = data.length - 1; j < 9; i--) {
+                //console.log(data[i]);
+                //console.log(data[i].room)
+                dataPoints[j] = data[i].numberOfPeople;
+                labels[j] = "Room" + " " + data[i].room;
+                /*
+                 color1 = Math.floor(Math.random() * 255) + 1;
+                 color2 = Math.floor(Math.random() * 255) + 1;
+                 color3 = Math.floor(Math.random() * 255) + 1;
+                 color4 = Math.floor(Math.random() * 255) + 1;
+                 color[i] = 'rgba(' + color1 + ', ' + color2 + ', ' + color3 + ', ' + color4 + ')';
+                 */
+                color[j] = backgroundColor[j];
+                j++;
+            }
+        }
+
+        function doRedirect() {
+            $.ajax({
+                url: "http://localhost:8080/room",
+                type: "GET",
+                jsonpCallback: 'getRoomData',
+                dataType: 'jsonp',
+                contentType: 'application/json',
+                success: function (data) {
+                    addData(data);
+                    new Chart(document.getElementById("bar-chart"), {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: "People",
+                                    backgroundColor: color,
+                                    data: dataPoints
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: {display: true},
+                            title: {
+                                display: true,
+                                text: 'Number of people in each room'
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }],
+                                xAxes: [{
+                                    // Change here
+                                    barPercentage: 0.5
+                                }]
+                            }
+                        }
+                    });
+                },
+                error: function (x, m) {
+                    console.log(x);
+                    console.log(m);
+                    alert('error!');
+                }
+            });
+        }
+
+        doRedirect();
+        setInterval(doRedirect, 10000);
+    };
+</script>
