@@ -1,0 +1,36 @@
+package it.univaq.disim.se.masaccio.processor;
+
+import com.datastax.spark.connector.japi.CassandraJavaUtil;
+import it.univaq.disim.se.masaccio.entity.IoTRoomData;
+import org.apache.spark.streaming.api.java.JavaDStream;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.datastax.spark.connector.japi.CassandraStreamingJavaUtil.javaFunctions;
+
+
+public class IoTRoomDataProcessor {
+	/**
+	 * Method to get total traffic counts of different type of vehicles for each route.
+	 * 
+	 * @param nonfilteredIotDataStream IoT data stream
+	 */
+	public void processRoomData(JavaDStream<IoTRoomData> nonfilteredIotDataStream) {
+		// Map Cassandra table column
+		Map<String, String> columnNameMappings = new HashMap<String, String>();
+		columnNameMappings.put("room", "room");
+		columnNameMappings.put("numberOfPeople", "numberofpeople");
+		columnNameMappings.put("timeStamp", "timestamp");
+
+		// call CassandraStreamingJavaUtil function to save in DB
+		javaFunctions(nonfilteredIotDataStream).writerBuilder("primaverakeyspace", "numberofpeople",
+				CassandraJavaUtil.mapToRow(IoTRoomData.class, columnNameMappings)).saveToCassandra();
+
+		// call CassandraStreamingJavaUtil function to save in DB
+		//javaFunctions(nonfilteredIotDataStream).writerBuilder("primaverakeyspace", "numberofpeople",
+				//CassandraJavaUtil.mapToRow(IoTRoomData.class, columnNameMappings)).;
+
+	}
+    
+}

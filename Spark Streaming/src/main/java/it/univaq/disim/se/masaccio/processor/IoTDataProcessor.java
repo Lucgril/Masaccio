@@ -1,0 +1,67 @@
+package it.univaq.disim.se.masaccio.processor;
+
+import it.univaq.disim.se.masaccio.entity.IoTRoomData;
+import it.univaq.disim.se.masaccio.util.IoTDataDecoder;
+import it.univaq.disim.se.masaccio.util.PropertyFileReader;
+import kafka.serializer.StringDecoder;
+import org.apache.log4j.Logger;
+import org.apache.spark.SparkConf;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaPairInputDStream;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.apache.spark.streaming.kafka.KafkaUtils;
+
+import java.util.*;
+
+
+
+public class IoTDataProcessor {
+	
+	 private static final Logger logger = Logger.getLogger(IoTDataProcessor.class);
+	
+	 public static void main(String[] args) throws Exception {
+		 //read Spark and Cassandra properties and create SparkConf
+		 Properties prop = PropertyFileReader.readPropertyFile();		
+		 SparkConf conf = new SparkConf()
+				 .setAppName(prop.getProperty("com.iot.app.spark.app.name"))
+				 .setMaster(prop.getProperty("com.iot.app.spark.master"))
+				 .set("spark.cassandra.connection.host", prop.getProperty("com.iot.app.cassandra.host"))
+				 .set("spark.cassandra.connection.port", prop.getProperty("com.iot.app.cassandra.port"))
+				 .set("spark.cassandra.connection.keep_alive_ms", prop.getProperty("com.iot.app.cassandra.keep_alive"));		 
+		 //batch interval of 5 seconds for incoming stream		 
+		 JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(5));	
+		 //add check point directory
+		 jssc.checkpoint(prop.getProperty("com.iot.app.spark.checkpoint.dir"));
+		 
+		 //read and set Kafka properties
+		 Map<String, String> kafkaParams = new HashMap<String, String>();
+		 kafkaParams.put("zookeeper.connect", prop.getProperty("com.iot.app.kafka.zookeeper"));
+		 kafkaParams.put("metadata.broker.list", prop.getProperty("com.iot.app.kafka.brokerlist"));
+		 String topic = prop.getProperty("com.iot.app.kafka.topic");
+		 Set<String> topicsSet = new HashSet<String>();
+		 topicsSet.add(topic);
+		 //create direct kafka stream
+		 JavaPairInputDStream<String, IoTRoomData> directKafkaStream = KafkaUtils.createDirectStream(
+			        jssc,
+			        String.class,
+			        IoTRoomData.class,
+			        StringDecoder.class,
+			        IoTDataDecoder.class,
+			        kafkaParams,
+			        topicsSet
+			    );
+		 logger.info("Starting Stream Processing");
+		 
+		 //We need non filtered stream to send to db
+		 JavaDStream<IoTRoomData> nonFilteredIotDataStream = directKafkaStream.map(tuple -> tuple._2());
+		 
+		 //process data
+		 IoTRoomDataProcessor iotRoomProcessor = new IoTRoomDataProcessor();
+		 iotRoomProcessor.processRoomData(nonFilteredIotDataStream);
+		 
+		 //start context
+		 jssc.start();            
+		 jssc.awaitTermination();  
+  }        
+}
