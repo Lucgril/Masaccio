@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Traffic Monitor application uses following tools and technologies.
+Masaccio system for the moment uses following tools and technologies.
 
 * [JDK - 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven - 3.5.2](https://maven.apache.org/download.cgi)
