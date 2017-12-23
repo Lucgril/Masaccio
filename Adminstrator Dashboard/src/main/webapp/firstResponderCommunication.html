@@ -1,0 +1,124 @@
+<!--
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Masaccio</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- //for-mobile-apps -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/style_1.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+    <script src="js/servizi.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div id="blocco1" class="content">
+    <h1>Masaccio</h1>
+    <div class="main">
+        <div class="profile-left wthree">
+            <div class="sap_tabs">
+                <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                    <ul class="resp-tabs-list">
+                        <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Login</span></li>
+                        <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><h2><span>Registrazione</span></h2></li>
+                        <div class="clear"> </div>
+                    </ul>
+                    <div class="resp-tabs-container">
+                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                            <div class="got"></div>
+                            <div class="login-top">
+                                <input type="text" id="username" name="username" class="email" placeholder="Username" required=""/>
+                                <input type="password" id="password" name="password" class="password" placeholder="Password" required=""/>
+                                <input type="checkbox" id="brand" value="">
+                                <div class="login-bottom">
+                                    <ul>
+                                        <li>
+                                            <button class="button" id="login" type="submit" value="LOGIN">LOGIN</button>
+                                        </li>
+
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+                            <div class="login-top sign-top">
+                                <input type="text" name="name" id="nome" class="email" placeholder="Nome" required=""/>
+                                <input type="text" name="cognome" id="cognome" class="email" placeholder="Cognome" required=""/>
+                                <input type="text" name="email2" id="email2" class="email" placeholder="Email" required=""/>
+                                <input type="password" name="password2" id="password2" class="phone" placeholder="Password" required=""/>
+                                <input type="text" name="telefono" id="telefono" class="password" placeholder="Telefono" required=""/>
+                                <input type="checkbox" id="brand1" value="">
+                                <div class="login-bottom">
+                                    <ul>
+                                        <li>
+                                            <button class="button" id="registrazione" type="submit" value="REGISTRATI">REGISTRATI</button>
+                                        </li>
+
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"> </div>
+            </div>
+        </div>
+        <div class="clear"> </div>
+    </div>
+</div>
+
+<div  id="eventi">
+    <h1>Masaccio</h1>
+    <br>
+    <h3 style="text-align: center"> Welcome to the First Responder Communication! Here you can interact and exchange information even in case of emergency.</h3>
+    <br>
+    <button id="logout"><span>Logout</span></button>
+    <div class="inner contact">
+        <!-- Form Area -->
+        <div class="contact-form">
+            <!-- Form -->
+            <form id="contact-us" method="post" action="#">
+                <!-- Right Inputs -->
+                <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                    <!-- Message -->
+                    <textarea name="message" id="message" class="form textarea"  placeholder="Message"></textarea>
+                </div><!-- End Right Inputs -->
+                <!-- Bottom Submit -->
+                <div class="relative fullwidth col-xs-12">
+                    <!-- Send Button -->
+                    <button type="submit" id="submit" name="submit" class="form-btn semibold">Send Message</button>
+                </div><!-- End Bottom Submit -->
+                <!-- Clear -->
+                <div class="clear"></div>
+            </form>
+
+            <!-- Your Mail Message -->
+            <div class="mail-message-area">
+                <!-- Message -->
+                <div class="alert gray-bg mail-message not-visible-message">
+                    <strong>Thank You !</strong> Your email has been delivered.
+                </div>
+            </div>
+
+        </div><!-- End Contact Form Area -->
+    </div><!-- End Inner -->
+<div id="id01" class="modal">
+    <form class="modal-content animate" >
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Chiudi">&times;</span>
+        </div>
+        <div id="io" class="container"></div>
+    </form>
+</div>
+</body>
+</html>

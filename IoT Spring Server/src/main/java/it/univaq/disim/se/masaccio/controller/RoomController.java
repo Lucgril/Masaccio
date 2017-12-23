@@ -1,7 +1,7 @@
 package it.univaq.disim.se.masaccio.controller;
 
-import it.univaq.disim.se.masaccio.data.impl.RoomImpl;
-import it.univaq.disim.se.masaccio.service.model.RoomService;
+import it.univaq.disim.se.masaccio.service.RoomService;
+import it.univaq.disim.se.masaccio.data.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class RoomController {
     private RoomService roomService;
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
-    RoomImpl create(@RequestBody RoomImpl room) {
+    Room create(@RequestBody Room room) {
         return roomService.createRoom(room);
     }
 
@@ -28,17 +28,17 @@ public class RoomController {
     }
 
     @RequestMapping(value = "/room", method = RequestMethod.GET)
-    List<RoomImpl> findAll() {
+    List<Room> findAll() {
         return roomService.getAllRooms();
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.GET)
-    RoomImpl findById(@PathVariable("id") long id) {
+    Room findById(@PathVariable("id") long id) {
         return roomService.getRoom(id);
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.PUT)
-    RoomImpl update(@RequestBody RoomImpl room) {
+    Room update(@RequestBody Room room) {
         return roomService.updateRoom(room);
     }
 }
