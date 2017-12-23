@@ -9,6 +9,8 @@ IoT Kafka Producer is a Maven application for generating IoT Data events using A
 * [Zookeeper - 3.4.11](https://zookeeper.apache.org)
 * [Kafka - 2.12-1.0.0](http://kafka.apache.org/downloads.html) 
 
+The main class IoTDataProducer Method generates semi-random IoT data in JSON with below format.
+
 You can build and run this application using below commands. Please check resources/iot-kafka.properties for configuration details.
 
 ```
