@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Masaccio system for the moment uses following tools and technologies.
+The first implemented service uses following tools and technologies.
 
 * [JDK - 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven - 3.5.2](https://maven.apache.org/download.cgi)
@@ -14,7 +14,7 @@ Masaccio system for the moment uses following tools and technologies.
 * jQuery.js
 * Chart.js
 
-IoT Traffic Monitor is a Maven Aggregator project. It includes following four projects.
+The monitoring service is a Maven Aggregator project. It includes following four projects.
 
 * IoT Kafka Producer
 * IoT Spark Processor
