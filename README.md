@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-The first implemented service uses following tools and technologies.
+The first implemented service (monitorig service) uses following tools and technologies.
 
 * [JDK - 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven - 3.5.2](https://maven.apache.org/download.cgi)
