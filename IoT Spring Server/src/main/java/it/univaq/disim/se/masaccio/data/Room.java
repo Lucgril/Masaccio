@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 @Table("NumberOfPeople")
-public class Room {
+public class Room implements Comparable<Room> {
 
     @PrimaryKey("room")
     private String room;
@@ -62,5 +62,10 @@ public class Room {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
+	@Override
+	public int compareTo(Room room) {
+		return Integer.parseInt(this.room) - Integer.parseInt(room.room);
+	}
 }
 

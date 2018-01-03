@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface RoomDataRepository extends CassandraRepository<Room> {
 
-    @Query("select * from numberofpeople group by room limit 9")
+    @Query("select * from numberofpeople group by room limit 10")
     List<Room> findRoomsLimit();
 }

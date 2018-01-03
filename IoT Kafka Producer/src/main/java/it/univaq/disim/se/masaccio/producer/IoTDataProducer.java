@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+
+import it.univaq.disim.se.masaccio.entity.MessageList;
 import org.apache.log4j.Logger;
 
 import it.univaq.disim.se.masaccio.util.PropertyFileReader;
@@ -59,7 +61,7 @@ public class IoTDataProducer {
 		while (true) {
 			List<IoTRoomData> eventList = new ArrayList<IoTRoomData>();
 			for (int roomId = 0; roomId < 10; roomId++) {									// create events for ten different rooms
-				int numberOfPeople = random.nextInt((max - min) + 1) + min;;				
+				int numberOfPeople = random.nextInt((max - min) + 1) + min;
 				Date timestamp = new Date();
 				IoTRoomData event = new IoTRoomData(Integer.toString(roomId), timestamp, numberOfPeople);
 				eventList.add(event);
@@ -69,8 +71,8 @@ public class IoTDataProducer {
 				KeyedMessage<String, IoTRoomData> data = new KeyedMessage<String, IoTRoomData>(topic, event);
 				producer.send(data);
 			}
-			//Thread.sleep(random.nextInt(3000 - 1000) + 1000);//random delay of 1 to 3 seconds
-			Thread.sleep(20000);
+			//Thread.sleep(random.nextInt(3000 - 1000) + 1000);   //random delay of 1 to 3 seconds
+			Thread.sleep(10000);
 		}
 	}
 }

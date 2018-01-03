@@ -1,24 +1,69 @@
 package it.univaq.disim.se.masaccio.controller;
 
 import it.univaq.disim.se.masaccio.data.Message;
-import it.univaq.disim.se.masaccio.data.Session;
-import it.univaq.disim.se.masaccio.service.SessionRepository;
+import it.univaq.disim.se.masaccio.data.MessageList;
+import it.univaq.disim.se.masaccio.data.User;
+import it.univaq.disim.se.masaccio.service.MessageDispatcher;
+import it.univaq.disim.se.masaccio.service.MessageService;
+import it.univaq.disim.se.masaccio.service.UserService;
+import it.univaq.disim.se.masaccio.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
+@RequestMapping(value = "/message")
 public class MessageController {
-
     @Autowired
-    private SessionRepository sessionRepository;
+    private MessageService messageService;
+    
+    @Autowired
+    private UserService userService;
+    
+    @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_RESPONDER')")
+    public Response insertMessage(@RequestBody Message m) throws Exception {
+    	MessageList message = new MessageList();
+        message.setText(m.getText());
+        
+        String userName;
+        
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
 
-    @CrossOrigin(origins = { "http://localhost:63342" }, maxAge = 6000)
-    @PostMapping("/message/{token}")
-    public void insertMessage(@RequestBody Message m, @PathVariable String token) {
-        Session session = sessionRepository.findByToken(token);
-        System.out.println(session.getUser().getId());
-        System.out.println(token);
-        System.out.println(m.getText());
-        System.out.println(m.getTopic());
+        User user = userService.findBySso(userName);
+        
+        message.setIdSender(user.getId());
+        message.setTimestamp(m.getTimestamp());
+        String id = Utility.generateToken();
+        message.setId(id);
+        
+        messageService.createMessageList(message);
+        
+        return Response.DEFAULT_RESPONSE_OK;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_RESPONDER', 'ROLE_EMPLOYEE')")
+    public List<MessageResponse> getMessages() {
+        List<MessageList> messageList;
+        List<MessageResponse> messageResponse = new ArrayList<MessageResponse>();
+        messageList = messageService.getAllMessages();
+        
+        for(MessageList message: messageList) {
+        	User sender = userService.findById(message.getIdSender());
+            messageResponse.add(new MessageResponse(message.getId(), message.getTimestamp(), message.getText(), sender));
+        }
+        return messageResponse;
     }
 }

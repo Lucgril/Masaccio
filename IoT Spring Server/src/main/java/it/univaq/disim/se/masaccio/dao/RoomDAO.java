@@ -1,6 +1,8 @@
 package it.univaq.disim.se.masaccio.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import it.univaq.disim.se.masaccio.utility.RoomDataRepository;
 import it.univaq.disim.se.masaccio.data.Room;
@@ -21,7 +23,6 @@ public class RoomDAO {
     @Autowired
     private MyCassandraTemplate myCassandraTemplate;
 
-    private List<Room> roomsList = new ArrayList<Room>();
 
     public Room createRoom(Room room) {
         return myCassandraTemplate.create(room);
@@ -40,9 +41,11 @@ public class RoomDAO {
     }
 
     public List<Room> getAllRooms() {
+        List<Room> roomsList = new ArrayList<Room>();
         for (Room room : dataRepository.findRoomsLimit()) {
             roomsList.add(room);
         }
+        Collections.sort(roomsList);
         return roomsList;
     }
 }

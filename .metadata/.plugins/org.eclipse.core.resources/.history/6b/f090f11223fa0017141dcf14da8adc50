@@ -1,0 +1,19 @@
+package it.univaq.disim.se.masaccio.service;
+
+import it.univaq.disim.se.masaccio.dao.MessageDAO;
+import it.univaq.disim.se.masaccio.data.MessageList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class MessageService {
+
+    @Autowired
+    private MessageDAO messageDAO;
+
+    public List<MessageList> getAllMessages() {
+        return messageDAO.getAllMessages();
+    }
+}

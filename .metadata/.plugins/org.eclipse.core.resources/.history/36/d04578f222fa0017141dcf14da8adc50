@@ -1,0 +1,33 @@
+package it.univaq.disim.se.masaccio.dao;
+
+import it.univaq.disim.se.masaccio.data.MessageList;
+import it.univaq.disim.se.masaccio.utility.MessageDataRepository;
+import it.univaq.disim.se.masaccio.utility.MyCassandraTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
+public class MessageDAO {
+
+    @Autowired
+    private MessageDataRepository messageDataRepository;
+
+    @Autowired
+    private MyCassandraTemplate myCassandraTemplate;
+
+    //private List<MessageList>  messagesList = new ArrayList<MessageList>();
+
+    public List<MessageList> getAllMessages() {
+        /*
+        for(MessageList message : messageDataRepository.findMessagesOrder()) {
+            messagesList.add(message);
+        }
+        return messagesList;
+    }
+    */
+        return myCassandraTemplate.findAll(MessageList.class);
+    }
+}

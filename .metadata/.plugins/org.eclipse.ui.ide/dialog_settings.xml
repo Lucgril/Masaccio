@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/paulnoorland/Primavera/Application/Masaccio/IoT Spring Server"/>
+		<item value="/Users/paulnoorland/Primavera/Application/Masaccio/IoT Spark Processor"/>
+		<item value="/Users/paulnoorland/Primavera/Application/Masaccio/IoT Kafka Producer"/>
+	</list>
+	<section name="CleanDialogSettings">
+		<item value="484" key="DIALOG_WIDTH"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="354" key="DIALOG_HEIGHT"/>
+		<item value="479" key="DIALOG_X_ORIGIN"/>
+		<item value="183" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

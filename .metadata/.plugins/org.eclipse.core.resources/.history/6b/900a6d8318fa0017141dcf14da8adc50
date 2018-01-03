@@ -1,0 +1,29 @@
+package it.univaq.disim.se.masaccio.utility;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import it.univaq.disim.se.masaccio.data.MessageList;
+import kafka.serializer.Encoder;
+import kafka.utils.VerifiableProperties;
+
+import org.apache.log4j.Logger;
+
+public class MessageDataEncoder implements Encoder<MessageList> {
+
+    private static final Logger logger = Logger.getLogger(MessageDataEncoder.class);
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    public MessageDataEncoder(VerifiableProperties verifiableProperties) {
+
+    }
+    public byte[] toBytes(MessageList message) {
+        try {
+            String msg = objectMapper.writeValueAsString(message);
+            logger.info(msg);
+            return msg.getBytes();
+        } catch (JsonProcessingException e) {
+            logger.error("Error in Serialization", e);
+        }
+        return null;
+    }
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;it.univaq.disim.se.masaccio.entity.MessageList.java&apos; to &apos;KafkaMessageList.java&apos;&#x0A;- Original project: &apos;IoT Kafka Producer&apos;&#x0A;- Original element: &apos;it.univaq.disim.se.masaccio.entity.MessageList.java&apos;&#x0A;- Renamed element: &apos;it.univaq.disim.se.masaccio.entity.KafkaMessageList.java&apos;" description="Rename compilation unit &apos;MessageList.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java&lt;it.univaq.disim.se.masaccio.entity{MessageList.java" name="KafkaMessageList.java" references="false" stamp="1515966909185" version="1.0"/>
+</session>

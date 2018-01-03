@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Masaccio - First Responder Communication</title>
+    <script src="../../static/js/jquery.min.js" type="text/javascript"></script>
+	    
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link href="<c:url value='../../static/css/style.css' />" rel="stylesheet" type="text/css" media="all" />
+    <script src="../../static/js/services.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+	<jsp:include page="../includes/menu.jsp" />
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>First responder communication</h1>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div  id="eventi">
+		    <div id="messages"></div>
+		    <div id="id01" class="modal">
+		        <form class="modal-content animate" >
+		            <div class="imgcontainer">
+		                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Chiudi">&times;</span>
+		            </div>
+		            <div id="io" class="container"></div>
+		        </form>
+		    </div>
+		    <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_RESPONDER')">
+			    <div class="inner contact">
+			        <!-- Form Area -->
+			        <div class="contact-form">
+			            <!-- Form -->
+			            <form id="contact-us" method="post" action="#">
+			            	<security:csrfInput />
+			                <!-- Right Inputs -->
+			                
+			                <div class="col-xs-8 col-xs-offset-2">
+			                    <!-- Message -->
+			                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			                    <textarea name="message" id="message" class="form textarea text-center"  placeholder="Message"></textarea>
+			                </div><!-- End Right Inputs -->
+			                <!-- Bottom Submit -->
+			                <div class="relative fullwidth col-xs-12">
+			                    <!-- Send Button -->
+			                    <button type="submit" id="submit" name="submit" class="form-btn semibold">Send Message</button>
+			                </div><!-- End Bottom Submit -->
+			                <!-- Clear -->
+			                <div class="clear"></div>
+			            </form>
+			        </div><!-- End Contact Form Area -->
+			    </div><!-- End Inner -->
+			</security:authorize>
+		</div>
+	</div>
+</body>
+</html>

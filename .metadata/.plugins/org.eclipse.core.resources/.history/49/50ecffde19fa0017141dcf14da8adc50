@@ -1,0 +1,5 @@
+package it.univaq.disim.se.masaccio.config;
+
+public class KafkaListenerConfig {
+
+}

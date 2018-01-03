@@ -1,0 +1,6 @@
+it/univaq/disim/se/masaccio/util/PropertyFileReader.class
+it/univaq/disim/se/masaccio/util/MessageDataEncoder.class
+it/univaq/disim/se/masaccio/entity/IoTRoomData.class
+it/univaq/disim/se/masaccio/producer/IoTDataProducer.class
+it/univaq/disim/se/masaccio/util/IoTDataEncoder.class
+it/univaq/disim/se/masaccio/entity/MessageList.class

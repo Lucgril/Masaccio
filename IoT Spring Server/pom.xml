@@ -8,6 +8,7 @@
     <artifactId>masaccio-server</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>masaccio-server</name>
     <!-- Inherit defaults from Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -15,12 +16,42 @@
         <version>1.5.3.RELEASE</version>
     </parent>
 
+    <properties>
+        <springframework.version>4.1.6.RELEASE</springframework.version>
+        <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
+        <hibernate.version>4.3.6.Final</hibernate.version>
+        <mysql.connector.version>5.1.31</mysql.connector.version>
+    </properties>
+
     <dependencies>
         <!-- Get the dependencies of a web application -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        
+        <!-- For automatic rebuild of front-end when developing -->
+        <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-devtools</artifactId>
+		    <optional>true</optional>
+	    </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>4.2.1.RELEASE</version>
+		</dependency>
 
         <!-- Spring Data Cassandra -->
         <dependency>
@@ -39,18 +70,74 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.0.12.Final</version>
         </dependency>
-    
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.5.6-Final</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.0.12.Final</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.42</version>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+
+		<dependency>
+		  <groupId>org.springframework.kafka</groupId>
+		  <artifactId>spring-kafka</artifactId>
+		  <version>2.1.0.RELEASE</version>
+		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
     </dependencies>
 
     <build>
@@ -58,17 +145,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-                    <archive>
-						<manifest>
-                            <mainClass>it.univaq.disim.se.masaccio.Application</mainClass>
-						</manifest>
-                    </archive>
-				</configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -85,6 +161,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>masaccio-server</finalName>
     </build>
     <repositories>
         <repository>

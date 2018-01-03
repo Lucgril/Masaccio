@@ -1,0 +1,62 @@
+package it.univaq.disim.se.masaccio.entity;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@SuppressWarnings("serial")
+public class KafkaMessageList implements Serializable {
+
+    private String id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="MST")
+    private Date timestamp;
+
+    private String text;
+
+    private int idSender;
+
+    public KafkaMessageList() {}
+
+    public KafkaMessageList(String id, Date timestamp, String text, int idSender) {
+    	super();
+        this.id = id;
+        this.timestamp = timestamp;
+        this.text = text;
+        this.idSender = idSender;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getIdSender() {
+        return this.idSender;
+    }
+
+    public void setIdSender(int idSender) {
+        this.idSender = idSender;
+    }
+}

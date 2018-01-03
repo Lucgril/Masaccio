@@ -1,0 +1,15 @@
+package it.univaq.disim.se.masaccio;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import it.univaq.disim.se.masaccio.processor.IoTDataProcessor;
+
+@SpringBootApplication
+public class MainApp {
+    public static void main(String[] args) {
+        SpringApplication.run(MainApp.class, args);
+        new IoTDataProcessor();
+    }
+}
