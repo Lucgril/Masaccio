@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;AccessRequest.java&apos; to &apos;IoT Spark Producer/src/main/java/it.univaq.disim.se.masaccio.entity&apos;&#x0A;- Original project: &apos;IoT Kafka Producer&apos;&#x0A;- Destination element: &apos;IoT Spark Producer/src/main/java/it.univaq.disim.se.masaccio.entity&apos;&#x0A;- Original element: &apos;it.univaq.disim.se.masaccio.entity.AccessRequest.java&apos;" description="Copy compilation unit" destination="=IoT Spark Producer/src\/main\/java&lt;it.univaq.disim.se.masaccio.entity" element1="/src\/main\/java&lt;it.univaq.disim.se.masaccio.entity{AccessRequest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1516713093766" units="1" version="1.0"/>
+</session>

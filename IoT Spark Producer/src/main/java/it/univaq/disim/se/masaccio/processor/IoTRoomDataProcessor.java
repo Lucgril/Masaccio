@@ -12,7 +12,7 @@ import static com.datastax.spark.connector.japi.CassandraStreamingJavaUtil.javaF
 
 public class IoTRoomDataProcessor {
 	/**
-	 * Method to get total traffic counts of different type of vehicles for each route.
+	 * Method to get room data to the database
 	 * 
 	 * @param nonfilteredIotDataStream IoT data stream
 	 */

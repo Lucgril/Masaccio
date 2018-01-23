@@ -1,6 +1,8 @@
 package it.univaq.disim.se.masaccio.processor;
 
+import it.univaq.disim.se.masaccio.entity.AccessRequest;
 import it.univaq.disim.se.masaccio.entity.IoTRoomData;
+import it.univaq.disim.se.masaccio.util.AccessRequestDecoder;
 import it.univaq.disim.se.masaccio.util.IoTDataDecoder;
 import it.univaq.disim.se.masaccio.util.PropertyFileReader;
 import kafka.serializer.StringDecoder;
@@ -41,8 +43,12 @@ public class IoTDataProcessor {
 		 String topic = prop.getProperty("com.iot.app.kafka.topic");
 		 Set<String> topicsSet = new HashSet<String>();
 		 topicsSet.add(topic);
-		 //create direct kafka stream
-		 JavaPairInputDStream<String, IoTRoomData> directKafkaStream = KafkaUtils.createDirectStream(
+		 
+		 Set<String> accessTopicSet = new HashSet<String>();
+		 accessTopicSet.add("accessRequest-event");
+		 
+		 //create direct kafka stream for room data
+		 JavaPairInputDStream<String, IoTRoomData> directRoomKafkaStream = KafkaUtils.createDirectStream(
 			        jssc,
 			        String.class,
 			        IoTRoomData.class,
@@ -51,14 +57,30 @@ public class IoTDataProcessor {
 			        kafkaParams,
 			        topicsSet
 			    );
+		 
+		//create direct kafka stream for access requests
+		 JavaPairInputDStream<String, AccessRequest> directAccessRequestKafkaStream = KafkaUtils.createDirectStream(
+			        jssc,
+			        String.class,
+			        AccessRequest.class,
+			        StringDecoder.class,
+			        AccessRequestDecoder.class,
+			        kafkaParams,
+			        accessTopicSet
+			    );
+		 
 		 logger.info("Starting Stream Processing");
 		 
 		 //We need non filtered stream to send to db
-		 JavaDStream<IoTRoomData> nonFilteredIotDataStream = directKafkaStream.map(tuple -> tuple._2());
+		 JavaDStream<IoTRoomData> nonFilteredIotDataStream = directRoomKafkaStream.map(tuple -> tuple._2());
+		 JavaDStream<AccessRequest> nonFilteredAccessDataStream = directAccessRequestKafkaStream.map(tuple -> tuple._2());
 		 
 		 //process data
 		 IoTRoomDataProcessor iotRoomProcessor = new IoTRoomDataProcessor();
 		 iotRoomProcessor.processRoomData(nonFilteredIotDataStream);
+		 
+		 AccessRequestProcessor accessRequestProcessor = new AccessRequestProcessor();
+		 accessRequestProcessor.processAccessRequests(nonFilteredAccessDataStream);
 		 
 		 //start context
 		 jssc.start();            

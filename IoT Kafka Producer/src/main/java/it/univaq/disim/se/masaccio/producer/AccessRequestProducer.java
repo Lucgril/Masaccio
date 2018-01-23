@@ -75,6 +75,8 @@ public class AccessRequestProducer implements Runnable {
 			while (true) {
 				List<AccessRequest> accessRequestList = new ArrayList<AccessRequest>();
 				Collections.shuffle(numbers);
+				
+				Collections.shuffle(numbers);
 				for (int i = 0; i < uidList.size(); i++) {									// create 1 access request for each uid
 					String item = items.get(numbers.get(i));
 					String uid = uidList.get(i);
