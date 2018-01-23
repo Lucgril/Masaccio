@@ -1,0 +1,120 @@
+package it.univaq.disim.se.masaccio.producer;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+
+import org.apache.log4j.Logger;
+
+import it.univaq.disim.se.masaccio.entity.AccessRequest;
+import it.univaq.disim.se.masaccio.entity.IoTRoomData;
+import it.univaq.disim.se.masaccio.util.PropertyFileReader;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
+
+public class AccessRequestProducer implements Runnable {
+	   private Thread t;
+	   private static final Logger logger = Logger.getLogger(AccessRequestProducer.class);
+	   
+	   AccessRequestProducer() {
+	      
+	   }
+	   
+	   public void run() {
+	      try {
+	    	  Properties prop = PropertyFileReader.readPropertyFile();		
+		   	   String zookeeper = prop.getProperty("com.iot.app.kafka.zookeeper");
+		   	   String brokerList = prop.getProperty("com.iot.app.kafka.brokerlist");
+		   	   String topic = "accessRequest-event";
+		   	   logger.info("Using Zookeeper=" + zookeeper + " ,Broker-list=" + brokerList + " and topic " + topic);
+	
+		   		// set producer properties
+		   		Properties properties = new Properties();
+		   		properties.put("zookeeper.connect", zookeeper);
+		   		properties.put("metadata.broker.list", brokerList);
+		   		properties.put("request.required.acks", "1");
+		   		properties.put("serializer.class", "it.univaq.disim.se.masaccio.util.AccessRequestEncoder");
+		   		//generate event
+		   		Producer<String, AccessRequest> producer = new Producer<String, AccessRequest>(new ProducerConfig(properties));
+		   		generateAccessRequestEvent(producer,topic);
+	      } catch (InterruptedException e) {
+	      } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   }
+	   
+	   public void start () {
+	      if (t == null) {
+	         t = new Thread (this);
+	         t.start ();
+	      }
+	   }
+	   
+
+		/**
+		 * Method runs in while loop and generates random IoT data in JSON with below format. 
+		 * 
+		 * {"room": "1", "timestamp":1465471124373, "numberOfPeople": 45}
+		 * 
+		 * @throws InterruptedException 
+		 * 
+		 * 
+		 */
+		private void generateAccessRequestEvent(Producer<String, AccessRequest> producer, String topic) throws InterruptedException {
+			ArrayList<String> items = createItemsList();
+
+			
+			Random random = new Random();
+			logger.info("Sending events");
+			int min = 40;						//Minimum number of visitors in a room
+			int max = 80;						//Maximum number of visitors in a room
+			// generate event in loop
+			while (true) {
+				List<IoTRoomData> eventList = new ArrayList<IoTRoomData>();
+				for (int roomId = 0; roomId < 10; roomId++) {									// create events for ten different rooms
+					int numberOfPeople = random.nextInt((max - min) + 1) + min;
+					Date timestamp = new Date();
+					IoTRoomData event = new IoTRoomData(Integer.toString(roomId), timestamp, numberOfPeople);
+					eventList.add(event);
+				}
+				Collections.shuffle(eventList);// shuffle for random events
+				for (IoTRoomData event : eventList) {
+					KeyedMessage<String, IoTRoomData> data = new KeyedMessage<String, IoTRoomData>(topic, event);
+					producer.send(data);
+				}
+				//Thread.sleep(random.nextInt(3000 - 1000) + 1000);   //random delay of 1 to 3 seconds
+				Thread.sleep(10000);
+			}
+		}
+		
+		private ArrayList<String> createItemsList() {
+			ArrayList<String> items = new ArrayList<String>();
+			
+			items.add("door1");
+			items.add("door2");
+			items.add("door3");
+			items.add("showcase1");
+			items.add("showcase2");
+			items.add("showcase3");
+			items.add("gate1");
+			items.add("gate2");
+			items.add("gate3");
+			
+			return items;
+		}
+		
+		private ArrayList<String> createUidList(){
+			ArrayList<String> uids = new ArrayList<String>();
+			uids.add("abcdef12");
+			uids.add("12345678");
+			uids.add("a1b2c3d4");
+			uids.add("abcd1234");
+			
+			return uids;
+		}
+	}

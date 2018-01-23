@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<div id="main">
+	<div id="main" style="padding: 10%; padding-top:0">
 	    <canvas id="bar-chart" width="800" height="400"></canvas>
 	</div>
 </body>

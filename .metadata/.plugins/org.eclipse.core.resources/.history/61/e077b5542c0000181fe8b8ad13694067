@@ -1,0 +1,49 @@
+package it.univaq.disim.se.masaccio.producer;
+
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
+import it.univaq.disim.se.masaccio.entity.IoTRoomData;
+import it.univaq.disim.se.masaccio.util.PropertyFileReader;
+import kafka.javaapi.producer.Producer;
+import kafka.producer.ProducerConfig;
+
+public class RoomDataProducer implements Runnable {
+	   private Thread t;
+	   private static final Logger logger = Logger.getLogger(RoomDataProducer.class);
+	   
+	   RoomDataProducer() {
+	      
+	   }
+	   
+	   public void run() {
+	      try {
+	    	  Properties prop = PropertyFileReader.readPropertyFile();		
+		   	   String zookeeper = prop.getProperty("com.iot.app.kafka.zookeeper");
+		   	   String brokerList = prop.getProperty("com.iot.app.kafka.brokerlist");
+		   	   String topic = prop.getProperty("com.iot.app.kafka.topic");
+		   	   logger.info("Using Zookeeper=" + zookeeper + " ,Broker-list=" + brokerList + " and topic " + topic);
+	
+		   		// set producer properties
+		   		Properties properties = new Properties();
+		   		properties.put("zookeeper.connect", zookeeper);
+		   		properties.put("metadata.broker.list", brokerList);
+		   		properties.put("request.required.acks", "1");
+		   		properties.put("serializer.class", "it.univaq.disim.se.masaccio.util.IoTDataEncoder");
+		   		//generate event
+		   		Producer<String, IoTRoomData> producer = new Producer<String, IoTRoomData>(new ProducerConfig(properties));
+		   		IoTDataProducer iotProducer = new IoTDataProducer();
+		   		iotProducer.generateIoTEvent(producer,topic);
+	      } catch (InterruptedException e) {
+	      }
+	   }
+	   
+	   public void start () {
+	      System.out.println("Starting " +  threadName );
+	      if (t == null) {
+	         t = new Thread (this, threadName);
+	         t.start ();
+	      }
+	   }
+	}

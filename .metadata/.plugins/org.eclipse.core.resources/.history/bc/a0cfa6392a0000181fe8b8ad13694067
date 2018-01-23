@@ -1,0 +1,5 @@
+package it.univaq.disim.se.masaccio.entity;
+
+public class AccessRequest {
+
+}

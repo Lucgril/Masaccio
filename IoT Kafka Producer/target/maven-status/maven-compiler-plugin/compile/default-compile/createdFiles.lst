@@ -1,6 +1,10 @@
 it/univaq/disim/se/masaccio/util/PropertyFileReader.class
 it/univaq/disim/se/masaccio/util/MessageDataEncoder.class
 it/univaq/disim/se/masaccio/entity/IoTRoomData.class
+it/univaq/disim/se/masaccio/entity/AccessRequest.class
+it/univaq/disim/se/masaccio/producer/AccessRequestProducer.class
 it/univaq/disim/se/masaccio/producer/IoTDataProducer.class
+it/univaq/disim/se/masaccio/util/AccessRequestEncoder.class
 it/univaq/disim/se/masaccio/util/IoTDataEncoder.class
+it/univaq/disim/se/masaccio/producer/RoomDataProducer.class
 it/univaq/disim/se/masaccio/entity/MessageList.class
