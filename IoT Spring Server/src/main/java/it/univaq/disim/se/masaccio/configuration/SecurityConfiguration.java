@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         		.antMatchers("/", "/home").authenticated()
                 .antMatchers("/IoTRoomData/**").access("hasRole('ADMIN')")
                 .antMatchers("/firstResponderCommunication/**").access("hasRole('ADMIN') or hasRole('EMPLOYEE') or hasRole('RESPONDER')")
+                .antMatchers("/AccessControl/**").access("hasRole('ADMIN')")
                 .and().formLogin().loginPage("/login")
                 .usernameParameter("ssoId").passwordParameter("password")
                 .and().csrf().disable()

@@ -21,5 +21,4 @@ public class UserServiceImpl implements UserService{
     public User findBySso(String sso) {
         return dao.findBySSO(sso);
     }
-
 }

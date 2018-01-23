@@ -22,6 +22,9 @@
 				<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYEE', 'ROLE_RESPONDER')">
                 	<li><a href="<c:url value='/firstResponderCommunication' />">First responder communication</a></li>
                 </security:authorize>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
+				    <li><a href="<c:url value='/AccessControl' />">Access Control</a></li>
+				</security:authorize>
                 <li><a href="<c:url value='/logout' />">Logout</a></li>
             </ul>
         </div>

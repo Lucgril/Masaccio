@@ -1,7 +1,6 @@
 package it.univaq.disim.se.masaccio.dao;
 
 import it.univaq.disim.se.masaccio.data.MessageList;
-import it.univaq.disim.se.masaccio.data.Room;
 import it.univaq.disim.se.masaccio.utility.MessageDataRepository;
 import it.univaq.disim.se.masaccio.utility.MyCassandraTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

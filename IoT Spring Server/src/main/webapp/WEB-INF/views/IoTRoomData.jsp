@@ -65,6 +65,7 @@
         }
 
         function doRedirect() {
+        	console.log('ja');
             $.ajax({
                 url: "http://localhost:8080/room",
                 type: "GET",

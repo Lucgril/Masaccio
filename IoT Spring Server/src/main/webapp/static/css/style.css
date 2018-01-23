@@ -984,3 +984,10 @@ nav.navbar.navbar-static-top {
 	background-color: white;
 }
 
+.glyphicon.glyphicon-ok {
+	color: green;
+}
+
+.glyphicon.glyphicon-remove {
+	color: red;
+}

@@ -37,6 +37,12 @@ public class RoutingController {
         model.addAttribute("user", getPrincipal());
         return "IoTRoomData";
     }
+    
+    @RequestMapping(value = "/AccessControl", method = RequestMethod.GET)
+    public String AccessControlPage(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "AccessControl";
+    }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
