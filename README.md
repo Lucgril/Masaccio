@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-The first implemented service (monitorig service) uses following tools and technologies.
+The second implemented service (First Responder Communication) uses following tools and technologies.
 
 * [JDK - 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven - 3.5.2](https://maven.apache.org/download.cgi)
@@ -11,15 +11,18 @@ The first implemented service (monitorig service) uses following tools and techn
 * [Cassandra - 3.11.1](http://cassandra.apache.org/download/)
 * [Spark - 2.2.1 Pre-built forhadoop2.7](http://spark.apache.org/downloads.html)
 * [Spring Boot - 1.5.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot/1.3.5.RELEASE)
+* [Spring Security - 5.0.1](https://projects.spring.io/spring-security/) 
+* bootstrap
 * jQuery.js
 * Chart.js
 
-The monitoring service is a Maven Aggregator project. It includes following four projects.
+The First Responder Communication service is a Maven Aggregator project. It includes following three projects.
 
 * IoT Kafka Producer
 * IoT Spark Processor
 * IoT Spring Server
-* Administrator Dashboard
+
+Maven projects also include the first implemented service. Please refer README.md file of IoT Spring Server for more details.
 
 For building these projects it requires tools and technologies written above. Please refer README.md files of individual projects for more details.
 
