@@ -14,6 +14,9 @@ The main class IoTDataProducer generates semi-random IoT data in JSON with below
 
 For the second service, the method "generateMessages" has been added. So it is retrieved from the server application when a message is send by some user and is used to publish the message on the specific topic. The message will be processed by Spark and stored on the Cassandra database.
 
+For the third service Multithreding capability has been added to our Java application. The main class creates two threads: the first one generates semi-random IoT data for the first service and the second one generates random accessRequest data in JSON with the below format:
+{"item": "room1", "timestamp":1465471124373, "carduid": "abcd1234"}.
+
 Please run below command to install this project in your local Maven repository so that it can be used by the server application.
 
 ```
