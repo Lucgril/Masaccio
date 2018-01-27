@@ -1,8 +1,0 @@
-it/univaq/disim/se/masaccio/util/AccessRequestDecoder.class
-it/univaq/disim/se/masaccio/util/PropertyFileReader.class
-it/univaq/disim/se/masaccio/entity/IoTRoomData.class
-it/univaq/disim/se/masaccio/entity/AccessRequest.class
-it/univaq/disim/se/masaccio/util/IoTDataDecoder.class
-it/univaq/disim/se/masaccio/processor/IoTDataProcessor.class
-it/univaq/disim/se/masaccio/processor/AccessRequestProcessor.class
-it/univaq/disim/se/masaccio/processor/IoTRoomDataProcessor.class
