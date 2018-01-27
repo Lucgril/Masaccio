@@ -10,7 +10,7 @@ IoT Spark Processor is a Maven application for processing IoT Data streams using
 * [Kafka - 2.12-1.0.0](http://kafka.apache.org/downloads.html) 
 * [Cassandra - 3.11.1](http://cassandra.apache.org/download/)
 
-The two most important classes are IoTDataProcessor and IoTRoomDataProcessor. The first one consumes Kafka IoT data and messages and create stream for processing them. The second one processes IoT data stream and store them to the database.
+The two most important classes are IoTDataProcessor and IoTRoomDataProcessor. The first one consumes Kafka IoT data, messages and accessRequest data and create stream for processing them. The second one processes IoT data stream and store them to the database.
 
 Please refer "IoTData.cql" file to create Keyspace and Tables in Cassandra Database, which are required by this application.
 
